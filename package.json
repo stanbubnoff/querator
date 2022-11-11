@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "standard": "^17.0.0"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "redis": "^4.5.0"
+  }
+}
