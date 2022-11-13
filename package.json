@@ -1,9 +1,35 @@
 {
   "devDependencies": {
+    "esbuild": "^0.15.13",
     "standard": "^17.0.0"
   },
   "dependencies": {
+    "ajv": "^8.11.0",
+    "ajv-errors": "^3.0.0",
     "amqplib": "^0.10.3",
-    "redis": "^4.5.0"
-  }
+    "async-mqtt": "^2.6.3",
+    "logmark": "^1.0.9",
+    "redis": "^4.5.0",
+    "toml": "^3.0.0",
+    "yaml": "^2.1.3"
+  },
+  "name": "querator",
+  "description": "Unified library for working with RabbitMQ, Redis pub/sub and others",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stasbubnoff/querator.git"
+  },
+  "author": "Stanislav Bubnov <stasbubnoff@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stasbubnoff/logmark/issues",
+    "email": "stasbubnoff@yahoo.com"
+  },
+  "homepage": "https://github.com/stasbubnoff/querator#readme",
+  "type": "module"
 }
