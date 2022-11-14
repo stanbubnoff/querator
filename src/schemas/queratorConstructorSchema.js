@@ -1,7 +1,7 @@
 export const queratorConstructorSchema = {
   type: 'object',
   properties: {
-    type: {
+    engine: {
       type: 'string',
       enum: ['redis', 'rabbitmq', 'mqtt', 'kafka'],
       nullable: false
@@ -11,7 +11,7 @@ export const queratorConstructorSchema = {
       enum: ['manual', 'json', 'yaml', 'toml'],
       nullable: false
     },
-    filename: {
+    file: {
       type: 'string',
       nullable: false
     },
@@ -20,6 +20,6 @@ export const queratorConstructorSchema = {
       nullable: true
     }
   },
-  required: ['type', 'configuration'],
+  required: ['engine', 'configuration'],
   additionalProperties: false
 }

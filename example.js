@@ -1,10 +1,10 @@
-import { Querator } from './src/core/Querator.js'
+import { Querator } from './pkg/core/Querator.js'
 
 const main = async () => {
   const broker = new Querator({
-    type: 'rabbitmq',
+    engine: 'rabbitmq',
     configuration: 'yaml',
-    filename: './config/rabbit_config.yaml'
+    file: './config/rabbit_config.yaml'
   })
 
   await broker.connect()
@@ -20,7 +20,7 @@ const main = async () => {
   setInterval(async () => {
     await broker.publish('test', 'test')
     await broker.publish('test2', 'test2')
-  }, 2000)
+  }, 1000)
 }
 
 main()

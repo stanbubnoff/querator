@@ -22,16 +22,12 @@ export const parseSettings = (type, filename) => {
       }
 
       case 'yaml': {
-        // const { default: YAML } = await import('yaml')
         result = YAML.parse(data.toString())
         break
       }
 
       case 'toml': {
-        (async () => {
-          // const { default: toml } = await import('toml')
-          result = toml.parse(data)
-        })()
+        result = toml.parse(data)
         break
       }
 

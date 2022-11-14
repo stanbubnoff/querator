@@ -65,9 +65,9 @@ export class Querator {
 
   /**
    * @param {object} options
-   * @param {'redis' | 'rabbitmq' | 'mqtt'} options.type
+   * @param {'redis' | 'rabbitmq' | 'mqtt'} options.engine
    * @param {'manual' | 'json' | 'yaml' | 'toml'} options.configuration
-   * @param {string} options.filename
+   * @param {string} options.file
    * @param {object} options.settings
    */
   constructor (options) {
@@ -81,12 +81,12 @@ export class Querator {
         throw new Error('Querator configuration failed')
       }
 
-      this.#BROKER_TYPE = options.type
+      this.#BROKER_TYPE = options.engine
 
       if (options.configuration === 'manual') {
         this.#BROKER_SETTINGS = options.settings ? options.settings : null
       } else {
-        this.#BROKER_SETTINGS = parseSettings(options.configuration, options.filename)
+        this.#BROKER_SETTINGS = parseSettings(options.configuration, options.file)
 
         if (this.#BROKER_SETTINGS === null) throw new Error('Failed to read config file')
       }
