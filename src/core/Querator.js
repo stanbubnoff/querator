@@ -20,7 +20,7 @@ export class Querator {
   #initBroker = async () => {
     try {
       switch (this.#BROKER_TYPE) {
-        case 'redis':
+        case 'redis': {
           const { createClient } = await import('redis')
 
           this.#PUBLISHER = createClient(this.#BROKER_SETTINGS ?? {})
@@ -39,8 +39,9 @@ export class Querator {
 
           Logger.info('Redis broker connected')
           break
+        }
 
-        case 'rabbitmq':
+        case 'rabbitmq': {
           const { default: amqplib } = await import('amqplib')
 
           const connection = await amqplib.connect(this.#BROKER_URI ?? this.#BROKER_SETTINGS ?? null, (err) => {
@@ -51,6 +52,7 @@ export class Querator {
           this.#RECEIVER = await connection.createChannel()
           Logger.info('RabbitMQ broker connected')
           break
+        }
 
         default:
           break
@@ -71,6 +73,7 @@ export class Querator {
   constructor (options) {
     try {
       if (!options) throw new Error('Querator config must be provided')
+      if (!options.configuration) throw new Error('Querator configuration type must be provided')
 
       const validateOptions = Validator.check(queratorConstructorSchema, options)
 
@@ -80,13 +83,16 @@ export class Querator {
 
       this.#BROKER_TYPE = options.type
 
-      if (options && options.configuration && options.configuration === 'manual') {
+      if (options.configuration === 'manual') {
         this.#BROKER_SETTINGS = options.settings ? options.settings : null
       } else {
-        const settings = parseSettings(options.configuration, options.filename)
-        console.log(settings)
+        this.#BROKER_SETTINGS = parseSettings(options.configuration, options.filename)
+
+        if (this.#BROKER_SETTINGS === null) throw new Error('Failed to read config file')
       }
+      console.log(this.#BROKER_SETTINGS)
     } catch (error) {
+      Logger.error('Querator constructor error', { error })
       process.exit(1)
     }
   }
@@ -102,13 +108,15 @@ export class Querator {
   async publish (topic, message) {
     try {
       switch (this.#BROKER_TYPE) {
-        case 'redis':
+        case 'redis': {
           await this.#PUBLISHER.publish(topic, message)
           break
+        }
 
-        case 'rabbitmq':
+        case 'rabbitmq': {
           await this.#PUBLISHER.sendToQueue(topic, Buffer.from(message))
           break
+        }
 
         default:
           break
@@ -121,13 +129,14 @@ export class Querator {
   async receive (topic, handler) {
     try {
       switch (this.#BROKER_TYPE) {
-        case 'redis':
+        case 'redis': {
           await this.#RECEIVER.subscribe(topic.toString(), (msg) => {
             handler(msg)
           })
           break
+        }
 
-        case 'rabbitmq':
+        case 'rabbitmq': {
           await this.#RECEIVER.assertQueue(topic.toString())
 
           this.#RECEIVER.consume(topic.toString(), (msg) => {
@@ -135,6 +144,7 @@ export class Querator {
             this.#RECEIVER.ack(msg)
           })
           break
+        }
 
         default:
           break

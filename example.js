@@ -3,12 +3,8 @@ import { Querator } from './src/core/Querator.js'
 const main = async () => {
   const broker = new Querator({
     type: 'rabbitmq',
-    configuration: 'manual',
-    settings: {
-      hostname: '0.0.0.0',
-      username: 'guest',
-      password: 'guest'
-    }
+    configuration: 'yaml',
+    filename: './config/rabbit_config.yaml'
   })
 
   await broker.connect()
