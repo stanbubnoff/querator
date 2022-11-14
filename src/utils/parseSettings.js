@@ -21,7 +21,8 @@ export const parseSettings = (filename) => {
         break
       }
 
-      case '.yaml': {
+      case '.yaml':
+      case '.yml': {
         result = YAML.parse(data.toString())
         break
       }
