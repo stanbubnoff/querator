@@ -14,7 +14,24 @@
     "type": "git",
     "url": "git+https://github.com/stasbubnoff/querator.git"
   },
-  "author": "Stanislav Bubnov <stasbubnoff@yahoo.com>",
+  "keywords": [
+    "nodejs",
+    "redis",
+    "rabbitmq",
+    "rabbit",
+    "kafka",
+    "mqtt",
+    "zeromq",
+    "queue",
+    "queues",
+    "message-queue",
+    "message-broker"
+  ],
+  "author": {
+    "name": "Stanislav Bubnov",
+    "email": "stasbubnoff@yahoo.com",
+    "url": "https://github.com/stasbubnoff"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stasbubnoff/logmark/issues",
