@@ -34,7 +34,7 @@ Querator implements a universal API for various message brokers such as RabbitMQ
 - RabbitMQ <- [amqplib](https://github.com/amqp-node/amqplib)
 - Redis <- [redis](https://github.com/redis/node-redis)
 - Kafka <- [kafkajs](https://github.com/tulios/kafkajs) (not ported yet). HELP WANTED
-- MQTT <- [MQTT.js[(https://github.com/mqttjs/MQTT.js) (not ported yet). HELP WANTED
+- MQTT <- [MQTT.js](https://github.com/mqttjs/MQTT.js) (not ported yet). HELP WANTED
 - ZeroMQ <- [zeromqjs](https://github.com/zeromq/zeromq.js) (not ported yet). HELP WANTED
 
 ### Run engine for testing
