@@ -6,11 +6,6 @@ export const queratorConstructorSchema = {
       enum: ['redis', 'rabbitmq', 'mqtt', 'kafka'],
       nullable: false
     },
-    configuration: {
-      type: 'string',
-      enum: ['manual', 'json', 'yaml', 'toml'],
-      nullable: false
-    },
     file: {
       type: 'string',
       nullable: false
@@ -20,6 +15,6 @@ export const queratorConstructorSchema = {
       nullable: true
     }
   },
-  required: ['engine', 'configuration'],
+  required: ['engine'],
   additionalProperties: false
 }

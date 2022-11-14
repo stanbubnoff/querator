@@ -66,14 +66,12 @@ export class Querator {
   /**
    * @param {object} options
    * @param {'redis' | 'rabbitmq' | 'mqtt'} options.engine
-   * @param {'manual' | 'json' | 'yaml' | 'toml'} options.configuration
-   * @param {string} options.file
-   * @param {object} options.settings
+   * @param {string} [options.file]
+   * @param {object} [options.settings]
    */
   constructor (options) {
     try {
       if (!options) throw new Error('Querator config must be provided')
-      if (!options.configuration) throw new Error('Querator configuration type must be provided')
 
       const validateOptions = Validator.check(queratorConstructorSchema, options)
 
@@ -83,13 +81,12 @@ export class Querator {
 
       this.#BROKER_TYPE = options.engine
 
-      if (options.configuration === 'manual') {
-        this.#BROKER_SETTINGS = options.settings ? options.settings : null
+      if (options.file) {
+        this.#BROKER_SETTINGS = parseSettings(options.file)
       } else {
-        this.#BROKER_SETTINGS = parseSettings(options.configuration, options.file)
-
-        if (this.#BROKER_SETTINGS === null) throw new Error('Failed to read config file')
+        this.#BROKER_SETTINGS = options.settings || {}
       }
+
       console.log(this.#BROKER_SETTINGS)
     } catch (error) {
       Logger.error('Querator constructor error', { error })
