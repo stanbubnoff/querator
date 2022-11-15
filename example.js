@@ -3,7 +3,6 @@ import { Querator } from './pkg/core/Querator.js'
 const main = async () => {
   const broker = new Querator({
     engine: 'rabbitmq',
-    configuration: 'yaml',
     file: './config/rabbit_config.yaml'
   })
 

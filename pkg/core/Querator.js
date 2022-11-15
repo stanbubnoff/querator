@@ -51,19 +51,15 @@ class Querator {
     try {
       if (!options)
         throw new Error("Querator config must be provided");
-      if (!options.configuration)
-        throw new Error("Querator configuration type must be provided");
       const validateOptions = Validator.check(queratorConstructorSchema, options);
       if (!validateOptions) {
         throw new Error("Querator configuration failed");
       }
       this.#BROKER_TYPE = options.engine;
-      if (options.configuration === "manual") {
-        this.#BROKER_SETTINGS = options.settings ? options.settings : null;
+      if (options.file) {
+        this.#BROKER_SETTINGS = parseSettings(options.file);
       } else {
-        this.#BROKER_SETTINGS = parseSettings(options.configuration, options.file);
-        if (this.#BROKER_SETTINGS === null)
-          throw new Error("Failed to read config file");
+        this.#BROKER_SETTINGS = options.settings || {};
       }
       console.log(this.#BROKER_SETTINGS);
     } catch (error) {

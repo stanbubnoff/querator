@@ -77,7 +77,6 @@ import { Querator } from 'querator'
 const main = async () => {
   const broker = new Querator({
     engine: 'redis',
-    configuration: 'manual',
     settings: {} // settings from engine library docs or empty for default settings
   })
 
@@ -106,8 +105,7 @@ import { Querator } from 'querator'
 const main = async () => {
   const broker = new Querator({
     engine: 'rabbitmq',
-    configuration: 'json', // or yaml, or toml
-    file: './config/rabbit_config.json' // or .yaml, or .toml
+    file: './config/rabbit_config.json' // .yaml, .yml, .toml
   })
 
   await broker.connect()

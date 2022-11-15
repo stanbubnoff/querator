@@ -1,7 +1,7 @@
 {
   "name": "querator",
   "description": "Universal NodeJS wrapper for working with RabbitMQ, Redis pub/sub, Kafka and other message queues",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "pkg/core/Querator.js",
   "types": "pkg/core/Querator.d.ts",
   "scripts": {
@@ -27,11 +27,7 @@
     "message-queue",
     "message-broker"
   ],
-  "author": {
-    "name": "Stanislav Bubnov",
-    "email": "stasbubnoff@yahoo.com",
-    "url": "https://github.com/stasbubnoff"
-  },
+  "author": "Stanislav Bubnov <stasbubnoff@yahoo.com> (https://github.com/stasbubnoff)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stasbubnoff/logmark/issues",
@@ -52,5 +48,8 @@
     "redis": "^4.5.0",
     "toml": "^3.0.0",
     "yaml": "^2.1.3"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

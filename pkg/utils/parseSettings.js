@@ -2,32 +2,33 @@ import { Logger } from "./Logger.js";
 import fs from "fs";
 import YAML from "yaml";
 import toml from "toml";
-const parseSettings = (type, filename) => {
+import path from "path";
+const parseSettings = (filename) => {
   try {
-    if (!type)
-      throw new Error("Settings type must be provided");
     if (!filename)
       throw new Error("Filename must be provided");
-    const path = new URL(`${process.cwd()}/${filename}`, import.meta.url);
-    const data = fs.readFileSync(path);
+    const file = new URL(`${process.cwd()}/${filename}`, import.meta.url);
+    const data = fs.readFileSync(file);
     if (!data)
       throw new Error("Failed to read broker settings file");
     let result;
-    switch (type) {
-      case "json": {
+    switch (path.extname(filename)) {
+      case ".json": {
         result = JSON.parse(data);
         break;
       }
-      case "yaml": {
+      case ".yaml":
+      case ".yml": {
         result = YAML.parse(data.toString());
         break;
       }
-      case "toml": {
+      case ".toml": {
         result = toml.parse(data);
         break;
       }
-      default:
-        break;
+      default: {
+        throw new Error("Unknown format of settings file");
+      }
     }
     return result;
   } catch (error) {
